@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .card {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      background-color: #d08d60;
+      color: white;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .card-body {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .card-text {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .order-summary {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .order-summary h5 {
+      color: #e55d50;
+    }
+
+    .order-summary ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .order-summary ul li {
+      font-size: 16px;
+      color: #777;
+      padding: 5px 0;
+    }
+
+    .btn-primary {
+      background-color: #d08d60;
+      border-color: #d08d60;
+    }
+
+    .btn-primary:hover {
+      background-color: #e55d50;
+      border-color: #e55d50;
+    }
+
+    .btn-secondary {
+      background-color: #555;
+      border-color: #555;
+    }
+
+    .btn-secondary:hover {
+      background-color: #333;
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Order Confirmation</div>
+        <div class="card-body">
+            <p class="card-text"><h5>Thank you for your purchase!</h5> </p>
+          <p class="card-text">Your order has been sent successfully and is being processed.</p>
+          <div class="order-summary">
+            <h5>Order Summary</h5>
+            <ul>
+<!--              <li>Order Number: <strong>#123456</strong></li>-->
+                <li>Delivery Address: <strong><span th:text="${address}"></span></strong></li>
+                <li>Phone Number: <strong><span th:text="${phoneNumber}"></span></strong></li>
+<!--                <li>Name: <strong><span th:text="${username}"></span></strong></li>-->
+              <li>Total Amount: <strong><span th:text="${total}"></span></strong></li>
+              <li>Items Purchased: <strong><span th:text="${cartCount}">0</span></strong></li>
+              <li>Estimated Delivery: <strong>5-7 Business Days</strong></li>
+            </ul>
+          </div>
+          <div class="mt-4">
+            <a href="/products/shop" class="btn btn-primary">Continue Shopping</a>
+            <a href="/orders/orderHistory/{email}" class="btn btn-secondary">View Order History</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
