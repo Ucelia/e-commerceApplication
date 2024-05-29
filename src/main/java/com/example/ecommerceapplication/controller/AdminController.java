@@ -133,7 +133,7 @@ public class AdminController {
             model.addAttribute("categories", categoryService.getAllCategory());
             model.addAttribute("productDTO", productDTO);
 
-            return "addProducts";
+            return "redirect:/admins/admin/products/add";
         } else {
             // Handle case where product with the given ID doesn't exist
             return "error"; // Or any other appropriate error page

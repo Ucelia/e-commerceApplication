@@ -81,6 +81,8 @@ public String signup(@ModelAttribute User user) {
 
                 // Store user in the session
                 request.getSession().setAttribute("authenticatedUser", user);
+                System.out.println(user.getEmail());
+
 
                 // Redirect based on user role
                 if (user.getRole().equals("ADMIN")) {

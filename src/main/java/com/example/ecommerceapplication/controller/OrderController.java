@@ -70,7 +70,7 @@ public class OrderController {
             //GlobalData.cart.clear();  // Clear the cart after order is placed
             redirectAttributes.addFlashAttribute("message", "Order placed successfully!");
             //return "redirect:/orders/orderHistory/" + authenticatedUser.getId();
-            return "redirect:/products/shop/confirmation";
+            return "redirect:/products/shop/checkout";
         } else {
             redirectAttributes.addFlashAttribute("error", "Failed to place order.");
             return "redirect:/orders/order";
@@ -80,12 +80,25 @@ public class OrderController {
 
 
 
-    @GetMapping("/orderHistory/{email}")
-    public String viewOrderHistory(Model model, @PathVariable Long userId, @PathVariable String email) {
-        //User user = userService.getUserById(userId); // Implement userService to get user by ID
+    @GetMapping("/orderHistory")
+    public String viewOrderHistory(Model model, HttpServletRequest request) {
+        // Retrieve the email from the session
+        String email = (String) request.getSession().getAttribute("email");
+        System.out.println("e-mail"+email);
+        //model.addAttribute(GlobalData.users.getEmail());
+
+//        if (email == null) {
+//            // Handle case where email is not found in the session
+//            model.addAttribute("error", "User not logged in.");
+//            return "login"; // or any other appropriate page
+//        }
+
+        // Find user by email
         User user = userService.findUserbyemail(email);
+        System.out.println(user.getEmail());
+
         if (user != null) {
-            List<Orders> orderHistory = orderService.getOrdersByCustomer(user);// Implement orderService to get order history for user
+            List<Orders> orderHistory = orderService.getOrdersByCustomer(user); // Implement orderService to get order history for user
 
             model.addAttribute("user", user);
             model.addAttribute("orderHistory", orderHistory);
@@ -96,6 +109,7 @@ public class OrderController {
             return "error"; // or any other appropriate error page
         }
     }
+
 
 
 
