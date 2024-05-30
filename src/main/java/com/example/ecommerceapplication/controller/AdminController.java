@@ -22,6 +22,7 @@ public class AdminController {
     private final CategoryService categoryService;
     private  final ProductService productService;
 
+
     @Autowired
     public AdminController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
@@ -142,6 +143,13 @@ public class AdminController {
 
     @GetMapping("/admin/adviewproduct/{id}")
     public String adViewProduct(Model model, @PathVariable int id){
+        model.addAttribute("product", productService.getProductById(id).get());
+        model.addAttribute("cartCount", GlobalData.cart.size());
+        return "adViewProduct";
+    }
+
+    @GetMapping("/admin/adViewOrderHistory/{id}")
+    public String adViewOrderHistory(Model model, @PathVariable int id){
         model.addAttribute("product", productService.getProductById(id).get());
         model.addAttribute("cartCount", GlobalData.cart.size());
         return "adViewProduct";

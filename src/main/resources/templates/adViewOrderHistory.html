@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Order History</h2>
+  <div th:if="${orders != null}">
+    <div th:each="order : ${orders}">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Order ID: <span th:text="${order.id}"></span></h5>
+          <p class="card-text">Date: <span th:text="${order.orderDate}"></span></p>
+          <p class="card-text">Status: <span th:text="${order.orderStatus}"></span></p>
+          <p class="card-text">Total Price: USD <span th:text="${order.totalPrice}"></span></p>
+          <p class="card-text">Address: <span th:text="${order.address}"></span></p>
+          <p class="card-text">Phone Number: <span th:text="${order.phoneNumber}"></span></p>
+          <h6>Products:</h6>
+          <ul>
+            <li th:each="product : ${order.products}" th:text="${product.name}">Product Name</li>
+          </ul>
+          <a th:href="@{/orders/order/editOrderStatus}" class="btn btn-primary mt-3">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:if="${orders == null}">
+    <p>No orders found.</p>
+  </div>
+  <input type="hidden" name="userId"  th:value="${userId}">
+
+</div>
+</body>
+
+</table>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossOrigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossOrigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossOrigin="anonymous"></script>
+<script>
+  function logout() {
+    window.location.href = '/users/login'; // Redirect to the login page
+  }
+</script>
+</body>
+</html>

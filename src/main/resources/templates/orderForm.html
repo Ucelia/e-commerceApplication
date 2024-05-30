@@ -121,6 +121,7 @@
             <input type="text" class="form-control" id="totalPrice" th:value="${total}" readonly>
         </div>
         <input type="hidden" name="userId" th:value="${userId}">
+        <input type="hidden" name="orderStatus" value="placed" readonly>
         <button type="submit" class="btn btn-primary btn-block mt-3">Place Order</button>
     </form>
     <a th:href="@{/carts/cart}" class="btn btn-secondary btn-block mt-3">Back to Cart</a>

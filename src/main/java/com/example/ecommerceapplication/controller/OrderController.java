@@ -2,6 +2,7 @@ package com.example.ecommerceapplication.controller;
 
 import com.example.ecommerceapplication.dto.GlobalData;
 import com.example.ecommerceapplication.dto.UserDTO;
+import com.example.ecommerceapplication.model.Category;
 import com.example.ecommerceapplication.model.Orders;
 import com.example.ecommerceapplication.model.Product;
 import com.example.ecommerceapplication.model.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/orders")
@@ -114,6 +116,8 @@ public class OrderController {
 
 
 
+
+
 //    @GetMapping("/ordering")
 //    public String checkout(Model model){
 //        model.addAttribute("cartCount", GlobalData.cart.size());
@@ -131,6 +135,34 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
     }
+
+    @GetMapping("/order/adViewOrderHistory")
+    public String adViewOrderHistory(Model model){
+        List<Orders> orderHistory = orderService.getAllOrders();
+        model.addAttribute("orders",orderService.getAllOrders());
+        return "adViewOrderHistory";
+    }
+
+    @GetMapping("/order/editOrderStatus")
+    public String showEditForm(Model model, @PathVariable long id) {
+        model.addAttribute("categories", orderService.getOrderById(id));
+
+        return "editOrderStatus";
+    }
+
+
+
+//    @GetMapping("/admin/categories/update/{id}")
+//    public String editOrderHistory(@PathVariable int id, Model model) {
+//        Optional<Category> category = categoryService.getCategoryById(id);
+//        if (category.isPresent()) {
+//            model.addAttribute("category", category.get());
+//            return "createcategories";
+//        } else {
+//            return "error";
+//        }
+//    }
+
 
     // Get cart by owner
     @GetMapping("/getOrdersByOwner/{userId}")

@@ -14,8 +14,9 @@ public class Orders {
     @ManyToOne
     private User customer;
     private LocalDate orderDate = LocalDate.now();
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+//    @Enumerated(EnumType.STRING)
+//    private OrderStatus status;
+    private String orderStatus;
     private Double totalPrice;
     private String address;
     private String phoneNumber;
